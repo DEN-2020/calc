@@ -1,0 +1,138 @@
+.home-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.home-title {
+  font-size: 38px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.home-sub {
+  text-align: center;
+  margin-bottom: 22px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* сетка карточек */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 16px;
+}
+
+/* ---------------------------
+   ГЛАВНАЯ КАРТОЧКА (GLASS 2025)
+---------------------------- */
+
+/* Светлая тема (light glass) */
+:root {
+  --card-bg: rgba(255, 255, 255, 0.25);   /* легкое белое стекло */
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Тёмная тема (dark glass) */
+:root[data-theme="dark"] {
+  --card-bg: rgba(0, 0, 0, 0.25);         /* темное мягкое стекло */
+  --card-border: rgba(255, 255, 255, 0.12);
+}
+/* Карточка */
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Новый Glass эффект */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  
+  color: var(--text-muted);
+  padding: 18px 14px;
+  text-decoration: none;
+  transition: 0.25s ease;
+  
+  /* Чтобы контент не прыгал */
+  min-height: 150px;
+}
+
+/* Hover (универсальный для обеих тем) */
+.home-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Иконка */
+.hc-icon {
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+/* Заголовок */
+.hc-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+  text-align: center;
+  
+  /* чтобы разные языки не ломали сетку */
+  min-height: 1.6em;
+}
+
+/* Описание под заголовком */
+.hc-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  
+  opacity: 1;
+  line-height: 1.35;
+  
+  /* стабильная высота контента */
+  min-height: 2.6em;
+}
+
+/* мобильная адаптация */
+@media (max-width: 420px) {
+  .home-card {
+    padding: 14px 10px;
+  }
+  .hc-icon {
+    font-size: 1.6rem;
+  }
+  .hc-title {
+    font-size: 0.9rem;
+  }
+  .hc-desc {
+    font-size: 0.rem;
+  }
+}
+
+/* mobile strict 2 columns */
+@media (max-width: 480px) {
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* tablet / mid */
+@media (min-width: 480px) and (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .home-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}

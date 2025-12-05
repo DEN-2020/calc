@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perpetual Futures Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- DEBUG — самым первым -->
+  <script src="js/debug.js?v=100"></script>
+
+  <!-- Web Components -->
+  <script type="module" src="js/components/header.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="css/main.css">
+  
+</head>
+
+<body>
+
+  <!-- Фон-блюр -->
+  <div id="bg-blur-layer"></div>
+
+  <!-- HEADER -->
+  <app-header></app-header>
+
+  <main class="app-main">
+    <div class="container">
+
+      <!-- MAIN CALCULATOR -->
+      <section class="card">
+        <h1 data-i18n="perp_title">Perpetual Futures</h1>
+
+        <!-- LIVE PRICE -->
+        <div class="live-price-box">
+          <label data-i18n="perp_live">Live Price:</label>
+          <span id="perp_live_price">---</span>
+          <button id="btn-fetch-price" type="button">⟳</button>
+        </div>
+
+        <form id="perp-form" class="form">
+
+          <!-- SYMBOL -->
+          <div class="form-row">
+            <label for="symbol" data-i18n="perp_symbol">Symbol</label>
+
+            <div class="input-wrap icon-input">
+              <img id="symbol-icon" class="symbol-icon-img" src="img/blank.png" alt="">
+              <input id="symbol" type="text" placeholder="ETHUSDT" autocomplete="off">
+              <div id="symbol-autocomplete" class="autocomplete-list"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="perp_margin" data-i18n="perp_margin">Margin ($)</label>
+            <input id="perp_margin" type="number" value="50" step="0.01">
+          </div>
+
+          <div class="form-row">
+            <label for="perp_entry" data-i18n="perp_entry">Entry price</label>
+            <input id="perp_entry" type="number" value="1800" step="0.01">
+          </div>
+
+          <div class="form-row">
+            <label for="perp_tp" data-i18n="perp_tp">Take profit</label>
+            <input id="perp_tp" type="number" value="3000" step="0.01">
+          </div>
+
+          <div class="form-row">
+            <label for="perp_sl" data-i18n="perp_sl">Stop loss</label>
+            <input id="perp_sl" type="number" placeholder="Optional" step="0.01">
+          </div>
+
+          <div class="form-row">
+            <label for="perp_leverage" data-i18n="perp_leverage">Leverage</label>
+            <input id="perp_leverage" type="number" value="10" min="1" step="1">
+          </div>
+
+          <div class="form-row">
+            <label for="perp_side" data-i18n="perp_side">Side</label>
+            <select id="perp_side">
+              <option value="long" data-i18n="perp_long">Long</option>
+              <option value="short" data-i18n="perp_short">Short</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="perp_fee" data-i18n="perp_fee">Fee % (per side)</label>
+            <input id="perp_fee" type="number" value="0.1" step="0.01">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="btn-calc-perp" data-i18n="perp_calculate">
+              Calculate
+            </button>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- RESULT BLOCK -->
+      <section class="card card--compact">
+        <h2 data-i18n="perp_result">Result</h2>
+        <div id="perp-result" class="result-block"></div>
+      </section>
+
+      <!-- CHART -->
+      <section class="card">
+        <h2 data-i18n="perp_position_view">Position View</h2>
+        <div id="perp-chart" class="chart-placeholder"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <!-- Глобальные -->
+  <script src="js/lang.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/update-notify.js"></script>
+  <script src="js/init-delay.js"></script>
+
+  <!-- Логика страницы -->
+  <script type="module" src="js/perp.js"></script>
+
+</body>
+</html>

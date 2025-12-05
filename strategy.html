@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="strategy_title">Strategy Risk Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- DEBUG -->
+  <script src="js/debug.js?v=100"></script>
+
+  <!-- Web Components -->
+  <script type="module" src="js/components/header.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="css/main.css">
+  
+</head>
+
+<body>
+
+<div id="bg-blur-layer"></div>
+
+<app-header></app-header>
+
+<main class="app-main">
+  <div class="container">
+
+    <!-- STRATEGY FORM -->
+    <section class="card">
+      <h1 data-i18n="strategy_title">Strategy Risk &amp; Edge</h1>
+
+      <p class="card-subtitle" data-i18n="strategy_subtitle">
+        Evaluate long-term expectancy, risk of ruin and strategy robustness.
+      </p>
+
+      <form id="strategy-form" class="form">
+
+        <div class="form-row">
+          <label for="start_capital" data-i18n="strategy_start_capital">Start capital ($)</label>
+          <input id="start_capital" type="number" value="1000" step="10">
+        </div>
+
+        <div class="form-row">
+          <label for="winrate" data-i18n="strategy_winrate">Winrate (%)</label>
+          <input id="winrate" type="number" value="45" step="0.1">
+        </div>
+
+        <div class="form-row">
+          <label for="rr" data-i18n="strategy_rr">R:R (profit/risk)</label>
+          <input id="rr" type="number" value="2.5" step="0.1">
+        </div>
+
+        <div class="form-row">
+          <label for="risk_pct" data-i18n="strategy_risk_pct">Risk per trade (%)</label>
+          <input id="risk_pct" type="number" value="2" step="0.1">
+        </div>
+
+        <div class="form-row">
+          <label for="trades" data-i18n="strategy_trades">Trades</label>
+          <input id="trades" type="number" value="100" step="1">
+        </div>
+
+        <div class="form-row">
+          <label for="fee_pct" data-i18n="strategy_fee_pct">Fee (%)</label>
+          <input id="fee_pct" type="number" value="0.2" step="0.01">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="strategy-calc-btn" data-i18n="strategy_calc_btn">
+            Analyze strategy
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="card card--compact">
+      <h2 data-i18n="strategy_summary">Summary</h2>
+      <div id="strategy-summary" class="strategy-summary"></div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="card">
+      <h2 data-i18n="strategy_details">Details</h2>
+      <div id="strategy-result" class="result-block"></div>
+    </section>
+
+    <!-- CHART -->
+    <section class="card">
+      <h2 data-i18n="strategy_chart">Equity &amp; Risk View</h2>
+      <div id="strategy-chart" class="chart-placeholder"></div>
+    </section>
+
+  </div>
+</main>
+
+<app-footer></app-footer>
+
+<!-- Глобальные -->
+<script src="js/lang.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/update-notify.js"></script>
+<script src="js/init-delay.js"></script>
+
+<!-- Логика страницы -->
+<script src="js/strategy.js"></script>
+
+</body>
+</html>

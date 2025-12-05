@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title data-i18n="app_title">Car Loan Calculator</title>
+
+  <!-- DEBUG -->
+  <script src="js/debug.js"></script>
+
+  <!-- Web Components -->
+  <script type="module" src="js/components/header.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+
+  <!-- PWA -->
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#0d6efd" media="(prefers-color-scheme:light)">
+  <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme:dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/car.css">
+</head>
+
+<body>
+
+<div id="bg-blur-layer"></div>
+
+<!-- HEADER -->
+<app-header></app-header>
+
+<main class="app-main">
+  <div class="container">
+
+    <!-- ======================== LOAN SECTION ========================= -->
+    <section class="card">
+      <h2 class="section-title" data-i18n="loan_section">Loan Calculation</h2>
+
+      <div class="form-row">
+        <label data-i18n="car_price"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🚗</span>
+          <input type="number" id="car_price">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="down_payment"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">💸</span>
+          <input type="number" id="down_payment">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="balloon_payment"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🎈</span>
+          <input type="number" id="balloon_payment" placeholder="0">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-col">
+          <label data-i18n="loan_years"></label>
+          <div class="input-with-icon">
+            <span class="input-icon">📅</span>
+            <input type="number" id="loan_years">
+          </div>
+        </div>
+
+        <div class="form-col">
+          <label data-i18n="loan_months"></label>
+          <div class="input-with-icon">
+            <span class="input-icon">📆</span>
+            <input type="number" id="loan_months">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="interest_rate"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">%</span>
+          <input type="number" id="interest_rate">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="loan_type"></label>
+        <select id="loan_type">
+          <option value="annuity" data-i18n="loan_type_annuity"></option>
+          <option value="diff" data-i18n="loan_type_diff"></option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="include_fees"></label>
+        <select id="include_fees_to_loan">
+          <option value="no" data-i18n="include_fees_no"></option>
+          <option value="yes" data-i18n="include_fees_yes"></option>
+        </select>
+      </div>
+
+      <h3 class="subsection-title">One-time Fees</h3>
+
+      <div class="form-row">
+        <label data-i18n="bank_fee"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🏦</span>
+          <input type="number" id="bank_fee">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="dealer_fee"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🏪</span>
+          <input type="number" id="dealer_fee">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="delivery_fee"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🚚</span>
+          <input type="number" id="delivery_fee">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label data-i18n="service_fee"></label>
+        <div class="input-with-icon">
+          <span class="input-icon">🛠️</span>
+          <input type="number" id="service_fee">
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btn_calc_loan" data-i18n="btn_calc_loan">
+        Calculate loan
+      </button>
+
+      <div id="loan_result" class="result-block hidden"></div>
+    </section>
+
+    <!-- ======================== EXTRA EXPENSES ========================= -->
+    <section class="card">
+      <h2 class="section-title" data-i18n="extra_section"></h2>
+
+      <label class="checkbox">
+        <input type="checkbox" id="extra_toggle">
+        <span data-i18n="extra_enable"></span>
+      </label>
+
+      <div id="extra_block" class="hidden" style="margin-top: 15px;">
+
+        <div class="form-grid">
+          <div class="form-col">
+            <label data-i18n="extra_tax"></label>
+            <div class="input-with-icon">
+              <span class="input-icon">🏛</span>
+              <input type="number" id="tax_value" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-col">
+            <label data-i18n="period"></label>
+            <select id="tax_type">
+              <option value="year" data-i18n="period_year"></option>
+              <option value="month" data-i18n="period_month"></option>
+              <option value="once" data-i18n="period_once"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 14px;">
+          <div class="form-col">
+            <label data-i18n="extra_insurance"></label>
+            <div class="input-with-icon">
+              <span class="input-icon">🛡️</span>
+              <input type="number" id="insurance_value" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-col">
+            <label data-i18n="period"></label>
+            <select id="insurance_type">
+              <option value="year" data-i18n="period_year"></option>
+              <option value="month" data-i18n="period_month"></option>
+              <option value="once" data-i18n="period_once"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 14px;">
+          <div class="form-col">
+            <label data-i18n="extra_service"></label>
+            <div class="input-with-icon">
+              <span class="input-icon">🔧</span>
+              <input type="number" id="service_value2" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-col">
+            <label data-i18n="period"></label>
+            <select id="service_type">
+              <option value="year" data-i18n="period_year"></option>
+              <option value="month" data-i18n="period_month"></option>
+              <option value="once" data-i18n="period_once"></option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 14px;">
+          <div class="form-col">
+            <label data-i18n="extra_other"></label>
+            <div class="input-with-icon">
+              <span class="input-icon">➕</span>
+              <input type="number" id="other_value" placeholder="0">
+            </div>
+          </div>
+
+          <div class="form-col">
+            <label data-i18n="period"></label>
+            <select id="other_type">
+              <option value="year" data-i18n="period_year"></option>
+              <option value="month" data-i18n="period_month"></option>
+              <option value="once" data-i18n="period_once"></option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================== CUSTOM EXPENSES ========================= -->
+    <section class="card">
+      <h2 class="section-title" data-i18n="custom_section"></h2>
+
+      <label class="checkbox">
+        <input type="checkbox" id="custom_toggle">
+        <span data-i18n="custom_enable"></span>
+      </label>
+
+      <div id="custom_block" class="hidden">
+        <div id="custom_list"></div>
+
+        <button class="btn btn-secondary" id="btn_add_custom" data-i18n="custom_add">
+          + Add expense
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================== FINAL SUMMARY ========================= -->
+    <section class="card">
+      <h2 class="section-title" data-i18n="final_section"></h2>
+
+      <button class="btn btn-primary" id="btn_calc_all" data-i18n="btn_calc_all"></button>
+
+      <div id="final_result" class="results-container hidden"></div>
+
+      <div id="total_summary" class="total-summary hidden">
+        <h3 class="total-title" data-i18n="total"></h3>
+        <div id="total_value" class="total-value">0</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<app-footer></app-footer>
+
+<!-- GLOBAL -->
+<script src="js/lang.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/update-notify.js"></script>
+<script src="js/init-delay.js"></script>
+
+<!-- PAGE LOGIC -->
+<script src="js/loan.js"></script>
+<script src="js/extra.js"></script>
+<script src="js/calc_all.js"></script>
+
+</body>
+</html>

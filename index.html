@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="brand_name">FinCalc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Цвет браузера -->
+  <meta name="theme-color" content="#0d6efd" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1b1b1b" media="(prefers-color-scheme: dark)">
+
+  <!-- DEBUG первым -->
+  <script src="js/debug.js?v=100"></script>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <!-- Web Components -->
+  <script type="module" src="js/components/header.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+</head>
+
+<body class="home-bg">
+
+  <!-- Шапка (минимальная версия, но переводится так же) -->
+  <app-header minimal></app-header>
+
+  <main class="app-main">
+    <div class="home-container">
+
+      <h1 class="home-title" data-i18n="brand_name">FinCalc</h1>
+      <p class="home-sub" data-i18n="home_subtitle">
+        Multi-tool profit &amp; risk calculators
+      </p>
+
+      <div class="home-grid">
+
+        <a href="spot.html" class="home-card">
+          <div class="hc-icon">📈</div>
+          <div class="hc-title" data-i18n="nav_spot">Spot</div>
+          <div class="hc-desc" data-i18n="home_spot_desc">TP/SL calculator</div>
+        </a>
+
+        <a href="perp.html" class="home-card">
+          <div class="hc-icon">⚡</div>
+          <div class="hc-title" data-i18n="nav_perp">Futures</div>
+          <div class="hc-desc" data-i18n="home_perp_desc">
+            Leverage • ROE • Liquidation
+          </div>
+        </a>
+
+        <a href="strategy.html" class="home-card">
+          <div class="hc-icon">📊</div>
+          <div class="hc-title" data-i18n="nav_strategy">Strategy</div>
+          <div class="hc-desc" data-i18n="home_strategy_desc">
+            Risk • RR • Monte-Carlo
+          </div>
+        </a>
+
+        <a href="invest.html" class="home-card">
+          <div class="hc-icon">💰</div>
+          <div class="hc-title" data-i18n="nav_invest">Invest</div>
+          <div class="hc-desc" data-i18n="home_invest_desc">
+            Compound • Growth chart
+          </div>
+        </a>
+
+        <a href="car.html" class="home-card">
+          <div class="hc-icon">🚗</div>
+          <div class="hc-title" data-i18n="nav_car">Car Loan</div>
+          <div class="hc-desc" data-i18n="home_car_desc">
+            Loan • Balloon • Total cost
+          </div>
+        </a>
+
+      </div>
+
+      <div class="home-footer-note" data-i18n="home_more">
+        More tools coming soon…
+      </div>
+
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+  
+  <!-- Глобальные скрипты + общий оркестратор -->
+  <script src="js/lang.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/update-notify.js"></script>
+  <script src="js/init-delay.js"></script>
+</body>
+</html>
